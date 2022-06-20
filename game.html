@@ -22,13 +22,36 @@
                 height: 100px;
                 border-color: black;
             }
+
+            #all {
+                position: absolute;
+                width: 100%;
+                text-align: center;
+                border-radius: 0.6em;
+            }
+
+            a {
+                color: black;
+            }
+
+            a:visited {
+                color: black;
+            }
+
+            a:active {
+                color: black;
+            }
+
+            button {
+                margin-right: 10px;
+            }
         </style>
     </head>
     <body>
         <div id="all">
             <div class="row">
                 <div class="img" onclick="changeImgTo()">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="1" alt="">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="11" alt="">
                 </div>
                 <div class="img" onclick="changeImgTo()">
                     <img src="img/shirtForGame.jpeg" border="5xp" id="12" alt="">
@@ -83,6 +106,7 @@
                 </div>
             </div>
         </div>
+        <!--<button><a href="Index.html">Stop game</a></button>-->
         <script>
             var i = 0;
             var a = 0;
@@ -90,23 +114,26 @@
             var chekResult = 0;
             var old_text = "";
             var image = "";
-            var imgArray = ['Ball', 'Ball1', 'BasketBall', 'BasketBall1', 'Bee', 'Bee1', 'Cat', 'Cat1', 'Coin',
+            var imgArray = ['Ball', 'Ball1', 'BasketballBall', 'BasketballBall1', 'Bee', 'Bee1', 'Cat', 'Cat1', 'Coin',
                 'Coin1', 'Dog', 'Dog1', 'Fish', 'Fish1', 'Telephone', 'Telephone1'];
             var randEl = 0;
 
             async function changeImgTo() {
+                //проверка: открывалась ли эта карточка до этого нажатия
                 var textId = event.target.id;
                 if (textId[0] === '1') {
                     randEl = Math.floor(Math.random()*imgArray.length);
                     var imgId = imgArray[randEl];
-                    document.getElementById(textId).id=imgId;
+                    document.getElementById(textId).id=(imgId);
+                    imgArray.splice(randEl, 1)
                 }
-                var text = ("img" + event.target.id);
-                image = document.getElementById(text);
-                alert(image);
-                var lastChar = text.charAt(text.length - 1);
-                if (lastChar == 1) {
-                    text = text.substring(0, text.length - 1);
+
+                //получение доступа к перевороту карточки
+                var textIdIMg = event.target.id;
+                image = document.getElementById(textIdIMg);
+                var lastChar = textIdIMg.charAt(textIdIMg.length - 1);
+                if (lastChar === '1') {
+                    textIdIMg = textIdIMg.substring(0, textIdIMg.length - 1);
                     a++;
                     if (old_text !== "") {
                         b = 2;
@@ -116,16 +143,20 @@
                 } else {
                     i++;
                 }
-                imageUp(text);
+
+                //переворот карточки
+                imageUp('img' + textIdIMg);
+
+                //проверка двух карточек на схожесть и различие
                 if (a === 1 && i === 1) {
-                    if (old_text === text) {
-                        document.getElementById("all").getElementsByClassName("row")
+                    if (old_text === textIdIMg) {
+                        //alert('old_text === text');
                         await new Promise(r => setTimeout(r, 1000));
-                        image = document.getElementById(text);
+                        image = document.getElementById(textIdIMg);
                         image.src="img/imgTick.jpeg";
                         image = document.getElementById(old_text + '1');
                         image.src="img/imgTick.jpeg";
-                        text = "";
+                        textIdIMg = "";
                         old_text = "";
                         a = 0;
                         i = 0;
@@ -133,24 +164,26 @@
                         chekResult++;
                     }
                     if (b === 1) {
+                        //alert('b === 1');
                         await new Promise(r => setTimeout(r, 1000));
-                        image = document.getElementById(text);
+                        image = document.getElementById(textIdIMg);
                         image.src="img/shirtForGame.jpeg";
                         image = document.getElementById(old_text + '1');
                         image.src="img/shirtForGame.jpeg";
-                        text = "";
+                        textIdIMg = "";
                         old_text = "";
                         a = 0;
                         i = 0;
                         b = 0;
                     }
                     if (b === 2) {
+                        //alert('b === 2');
                         await new Promise(r => setTimeout(r, 1000));
-                        image = document.getElementById(text + '1');
+                        image = document.getElementById(textIdIMg + '1');
                         image.src="img/shirtForGame.jpeg";
                         image = document.getElementById(old_text);
                         image.src="img/shirtForGame.jpeg";
-                        text = "";
+                        textIdIMg = "";
                         old_text = "";
                         a = 0;
                         i = 0;
@@ -158,12 +191,15 @@
                     }
                 }
                 if (i === 2) {
-                    if (text !== old_text) {
+                    if (textIdIMg !== old_text) {
+                        //alert('textIdIMg !== old_text i === 2');
                         await new Promise(r => setTimeout(r, 1000));
-                        image = document.getElementById(text);
+                        image = document.getElementById(textIdIMg);
                         image.src = "img/shirtForGame.jpeg";
                         image = document.getElementById(old_text);
                         image.src = "img/shirtForGame.jpeg";
+                        textIdIMg = "";
+                        old_text = "";
                         a = 0;
                         i = 0;
                         b = 0;
@@ -172,12 +208,15 @@
                     }
                 }
                 if (a === 2) {
-                    if (text !== old_text) {
+                    if (textIdIMg !== old_text) {
+                        //alert('textIdIMg !== old_text a === 2');
                         await new Promise(r => setTimeout(r, 1000));
-                        image = document.getElementById(text + '1');
+                        image = document.getElementById(textIdIMg + '1');
                         image.src = "img/shirtForGame.jpeg";
                         image = document.getElementById(old_text + '1');
                         image.src = "img/shirtForGame.jpeg";
+                        textIdIMg = "";
+                        old_text = "";
                         a = 0;
                         i = 0;
                         b = 0;
@@ -185,10 +224,12 @@
                         a = a - 1;
                     }
                 }
+
+                //проверка победы
                 if (chekResult === 8) {
                     alert("YOU WON!!!")
                 }
-                old_text = text;
+                old_text = textIdIMg;
             }
 
             function imageUp(textUp) {
