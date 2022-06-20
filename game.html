@@ -25,61 +25,61 @@
         </style>
     </head>
     <body>
-        <div>
+        <div id="all">
             <div class="row">
-                <div class="img" onclick="changeImgTo('Bee')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgBee" alt="">
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="1" alt="">
                 </div>
-                <div class="img" onclick="changeImgTo('Coin')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgCoin" alt="">
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="12" alt="">
                 </div>
-                <div class="img" onclick="changeImgTo('Bee1')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgBee1" alt="">
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="13" alt="">
                 </div>
-                <div class="img" onclick="changeImgTo('Ball1')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgBall1" alt="">
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="14" alt="">
                 </div>
             </div>
             <div class="row">
-                <div class="img" onclick="changeImgTo('Ball')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgBall" alt="">
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="15" alt="">
                 </div>
-                <div class="img" onclick="changeImgTo('Coin1')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgCoin1" alt="">
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="16" alt="">
                 </div>
-                <div class="img" onclick="changeImgTo('BasketballBall1')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgBasketballBall1" alt="">
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="17" alt="">
                 </div>
-                <div class="img" onclick="changeImgTo('Cat')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgCat" alt="">
-                </div>
-            </div>
-            <div class="row">
-                <div class="img" onclick="changeImgTo('Dog1')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgDog1" alt="">
-                </div>
-                <div class="img" onclick="changeImgTo('Cat1')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgCat1" alt="">
-                </div>
-                <div class="img" onclick="changeImgTo('Dog')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgDog" alt="">
-                </div>
-                <div class="img" onclick="changeImgTo('Fish')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgFish" alt="">
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="18" alt="">
                 </div>
             </div>
             <div class="row">
-                <div class="img" onclick="changeImgTo('Telephone1')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgTelephone1" alt="">
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="19" alt="">
                 </div>
-                <div class="img" onclick="changeImgTo('Fish1')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgFish1" alt="">
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="110" alt="">
                 </div>
-                <div class="img" onclick="changeImgTo('Telephone')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgTelephone" alt="">
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="111" alt="">
                 </div>
-                <div class="img" onclick="changeImgTo('BasketballBall')">
-                    <img src="img/shirtForGame.jpeg" border="5xp" id="imgBasketballBall" alt="">
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="112" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="113" alt="">
+                </div>
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="114" alt="">
+                </div>
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="115" alt="">
+                </div>
+                <div class="img" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="116" alt="">
                 </div>
             </div>
         </div>
@@ -90,10 +90,20 @@
             var chekResult = 0;
             var old_text = "";
             var image = "";
+            var imgArray = ['Ball', 'Ball1', 'BasketBall', 'BasketBall1', 'Bee', 'Bee1', 'Cat', 'Cat1', 'Coin',
+                'Coin1', 'Dog', 'Dog1', 'Fish', 'Fish1', 'Telephone', 'Telephone1'];
+            var randEl = 0;
 
-            async function changeImgTo(x) {
-                var text = ("img" + x);
+            async function changeImgTo() {
+                var textId = event.target.id;
+                if (textId[0] === '1') {
+                    randEl = Math.floor(Math.random()*imgArray.length);
+                    var imgId = imgArray[randEl];
+                    document.getElementById(textId).id=imgId;
+                }
+                var text = ("img" + event.target.id);
                 image = document.getElementById(text);
+                alert(image);
                 var lastChar = text.charAt(text.length - 1);
                 if (lastChar == 1) {
                     text = text.substring(0, text.length - 1);
@@ -109,6 +119,12 @@
                 imageUp(text);
                 if (a === 1 && i === 1) {
                     if (old_text === text) {
+                        document.getElementById("all").getElementsByClassName("row")
+                        await new Promise(r => setTimeout(r, 1000));
+                        image = document.getElementById(text);
+                        image.src="img/imgTick.jpeg";
+                        image = document.getElementById(old_text + '1');
+                        image.src="img/imgTick.jpeg";
                         text = "";
                         old_text = "";
                         a = 0;
@@ -117,7 +133,7 @@
                         chekResult++;
                     }
                     if (b === 1) {
-                        await new Promise(r => setTimeout(r, 1500));
+                        await new Promise(r => setTimeout(r, 1000));
                         image = document.getElementById(text);
                         image.src="img/shirtForGame.jpeg";
                         image = document.getElementById(old_text + '1');
@@ -129,7 +145,7 @@
                         b = 0;
                     }
                     if (b === 2) {
-                        await new Promise(r => setTimeout(r, 1500));
+                        await new Promise(r => setTimeout(r, 1000));
                         image = document.getElementById(text + '1');
                         image.src="img/shirtForGame.jpeg";
                         image = document.getElementById(old_text);
@@ -142,27 +158,35 @@
                     }
                 }
                 if (i === 2) {
-                    await new Promise(r => setTimeout(r, 1500));
-                    image = document.getElementById(text);
-                    image.src="img/shirtForGame.jpeg";
-                    image = document.getElementById(old_text);
-                    image.src="img/shirtForGame.jpeg";
-                    a = 0;
-                    i = 0;
-                    b = 0;
+                    if (text !== old_text) {
+                        await new Promise(r => setTimeout(r, 1000));
+                        image = document.getElementById(text);
+                        image.src = "img/shirtForGame.jpeg";
+                        image = document.getElementById(old_text);
+                        image.src = "img/shirtForGame.jpeg";
+                        a = 0;
+                        i = 0;
+                        b = 0;
+                    } else {
+                        i = i - 1;
+                    }
                 }
                 if (a === 2) {
-                    await new Promise(r => setTimeout(r, 1500));
-                    image = document.getElementById(text + '1');
-                    image.src = "img/shirtForGame.jpeg";
-                    image = document.getElementById(old_text + '1');
-                    image.src = "img/shirtForGame.jpeg";
-                    a = 0;
-                    i = 0;
-                    b = 0;
+                    if (text !== old_text) {
+                        await new Promise(r => setTimeout(r, 1000));
+                        image = document.getElementById(text + '1');
+                        image.src = "img/shirtForGame.jpeg";
+                        image = document.getElementById(old_text + '1');
+                        image.src = "img/shirtForGame.jpeg";
+                        a = 0;
+                        i = 0;
+                        b = 0;
+                    } else {
+                        a = a - 1;
+                    }
                 }
                 if (chekResult === 8) {
-                    alert('YOU WON!!!')
+                    alert("YOU WON!!!")
                 }
                 old_text = text;
             }
