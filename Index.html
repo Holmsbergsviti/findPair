@@ -2,22 +2,49 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Memory Game</title>
+        <title>Find Pair</title>
         <style>
             body {
                 background-color: yellow;
             }
 
-            div {
-                width: 100%;
-                top: 50%;
-                text-align: center;
+            .row div{
+                float: left;
+                margin: 10px;
             }
-            
-            button {
-                background-color: antiquewhite;
-                width: 120px;
-                height: 50px;
+
+            .row {
+                clear: both;
+            }
+
+            img {
+                border-color: black;
+            }
+
+            @media screen and (max-width: 991px){
+                img {
+                    width: 200px;
+                    height: 200px;
+                }
+            }
+
+            @media screen and (min-width: 992px){
+                img {
+                    width: 200px;
+                    height: 200px;
+                }
+            }
+
+            @media screen and (min-width: 1200px){
+                img {
+                    width: 150px;
+                    height: 150px;
+                }
+            }
+
+            #all {
+                position: absolute;
+                width: 100%;
                 border-radius: 0.6em;
             }
 
@@ -32,9 +59,216 @@
             a:active {
                 color: black;
             }
+
+            button {
+                margin-right: 10px;
+            }
         </style>
     </head>
     <body>
-        <div><button><a href="game.html">Start game</a></button></div>
+        <div id="all">
+            <div class="row">
+                <div id="71" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="11" alt="">
+                </div>
+                <div id="72" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="12" alt="">
+                </div>
+                <div id="73" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="13" alt="">
+                </div>
+                <div id="74" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="14" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <div id="75" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="15" alt="">
+                </div>
+                <div id="76" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="16" alt="">
+                </div>
+                <div id="77" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="17" alt="">
+                </div>
+                <div id="78" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="18" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <div id="79" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="19" alt="">
+                </div>
+                <div id="710" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="110" alt="">
+                </div>
+                <div id="711" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="111" alt="">
+                </div>
+                <div id="712" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="112" alt="">
+                </div>
+            </div>
+            <div class="row">
+                <div id="713" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="113" alt="">
+                </div>
+                <div id="714" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="114" alt="">
+                </div>
+                <div id="715" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="115" alt="">
+                </div>
+                <div id="716" onclick="changeImgTo()">
+                    <img src="img/shirtForGame.jpeg" border="5xp" id="116" alt="">
+                </div>
+            </div>
+        </div>
+        <script>
+            var i = 0;
+            var a = 0;
+            var b = 0;
+            var chekResult = 0;
+            var old_text = "";
+            var image = "";
+            var imgArray = ['Ball', 'Ball1', 'BasketballBall', 'BasketballBall1', 'Bee', 'Bee1', 'Cat', 'Cat1', 'Coin',
+                'Coin1', 'Dog', 'Dog1', 'Fish', 'Fish1', 'Telephone', 'Telephone1'];
+            var randEl = 0;
+            var alDisDivArray = [];
+            var allDivArray = ['71', '72', '73', '74', '75', '76', '77', '78', '79', '710', '711', '712', '713', '714',
+                '715', '716'];
+
+            async function changeImgTo() {
+                //проверка: открывалась ли эта карточка до этого нажатия
+                var textId = event.target.id;
+                if (textId[0] === '1') {
+                    randEl = Math.floor(Math.random()*imgArray.length);
+                    var imgId = imgArray[randEl];
+                    document.getElementById(textId).id=(imgId);
+                    imgArray.splice(randEl, 1)
+                }
+
+                //получение доступа к перевороту карточки
+                var textIdIMg = event.target.id;
+                image = document.getElementById(textIdIMg);
+                var lastChar = textIdIMg.charAt(textIdIMg.length - 1);
+                if (lastChar === '1') {
+                    textIdIMg = textIdIMg.substring(0, textIdIMg.length - 1);
+                    a++;
+                    if (old_text !== "") {
+                        b = 2;
+                    } else {
+                        b = 1;
+                    }
+                } else {
+                    i++;
+                }
+
+                //переворот карточки
+                imageUp('img' + textIdIMg);
+
+                //проверка двух карточек на схожесть и различие
+                if (a === 1 && i === 1) {
+                    if (old_text === textIdIMg) {
+                        //alert('old_text === text');
+                        await new Promise(r => setTimeout(r, 1000));
+                        image = document.getElementById(textIdIMg);
+                        image.src="img/imgTick.jpeg";
+                        image = document.getElementById(old_text + '1');
+                        image.src="img/imgTick.jpeg";
+                        textIdIMg = "";
+                        old_text = "";
+                        a = 0;
+                        i = 0;
+                        b = 0;
+                        chekResult++;
+                    }
+                    if (b === 1) {
+                        //alert('b === 1');
+
+                        await new Promise(r => setTimeout(r, 1000));
+                        image = document.getElementById(textIdIMg);
+                        image.src="img/shirtForGame.jpeg";
+                        image = document.getElementById(old_text + '1');
+                        image.src="img/shirtForGame.jpeg";
+                        textIdIMg = "";
+                        old_text = "";
+                        a = 0;
+                        i = 0;
+                        b = 0;
+                    }
+                    if (b === 2) {
+                        //alert('b === 2');
+                        await new Promise(r => setTimeout(r, 1000));
+                        image = document.getElementById(textIdIMg + '1');
+                        image.src="img/shirtForGame.jpeg";
+                        image = document.getElementById(old_text);
+                        image.src="img/shirtForGame.jpeg";
+                        textIdIMg = "";
+                        old_text = "";
+                        a = 0;
+                        i = 0;
+                        b = 0;
+                    }
+                }
+                if (i === 2) {
+                    if (textIdIMg !== old_text) {
+                        //alert('textIdIMg !== old_text i === 2');
+                        await new Promise(r => setTimeout(r, 1000));
+                        image = document.getElementById(textIdIMg);
+                        image.src = "img/shirtForGame.jpeg";
+                        image = document.getElementById(old_text);
+                        image.src = "img/shirtForGame.jpeg";
+                        textIdIMg = "";
+                        old_text = "";
+                        a = 0;
+                        i = 0;
+                        b = 0;
+                    } else {
+                        i = i - 1;
+                    }
+                }
+                if (a === 2) {
+                    if (textIdIMg !== old_text) {
+                        //alert('textIdIMg !== old_text a === 2');
+                        await new Promise(r => setTimeout(r, 1000));
+                        image = document.getElementById(textIdIMg + '1');
+                        image.src = "img/shirtForGame.jpeg";
+                        image = document.getElementById(old_text + '1');
+                        image.src = "img/shirtForGame.jpeg";
+                        textIdIMg = "";
+                        old_text = "";
+                        a = 0;
+                        i = 0;
+                        b = 0;
+                    } else {
+                        a = a - 1;
+                    }
+                }
+
+                //проверка победы
+                if (chekResult === 8) {
+                    alert("YOU WON!!!")
+                }
+                old_text = textIdIMg;
+            }
+
+            function imageUp(textUp) {
+                image.src=("img/" + textUp + ".jpeg");
+            }
+
+            /*function disableDiv() {
+                for (var i = 0; i < allDivArray.length;) {
+                    document.getElementById(allDivArray[i]).style.pointerEvents = "none";
+                }
+            }
+
+            function enableDiv() {
+                for (var i = 0; i < allDivArray.length;) {
+                    //document.getElementById(allDivArray[i]).style.pointerEvents = "changeImgTo()";
+                    $(allDivArray[i]).attributes('onClick', changeImgTo())
+                }
+            }*/
+        </script>
     </body>
 </html>
