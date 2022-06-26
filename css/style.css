@@ -1,0 +1,43 @@
+body {
+    background-color: yellow;
+}
+
+.row div{
+    float: left;
+    margin: 10px;
+}
+
+.row {
+    clear: both;
+}
+
+img {
+    border: 5px solid black;
+}
+
+#all {
+    position: absolute;
+    width: 100%;
+    border-radius: 0.6em;
+}
+
+@media screen and (max-width: 991px){
+    img {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media screen and (min-width: 992px){
+    img {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+@media screen and (min-width: 1200px){
+    img {
+        width: 150px;
+        height: 150px;
+    }
+}
