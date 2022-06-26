@@ -44,77 +44,26 @@ async function changeImg() {
     //проверка двух карточек на схожесть и различие
     if (elementIndex1 === 1 && elementIndex0 === 1) {
         if (oldImgId === newImgId) {
-            //alert('oldImgId === text');
-            await new Promise(r => setTimeout(r, 1000));
-            image = document.getElementById(newImgId);
-            image.src="img/imgTick.jpeg";
-            image = document.getElementById(oldImgId + '1');
-            image.src="img/imgTick.jpeg";
-            newImgId = "";
-            oldImgId = "";
-            elementIndex1 = 0;
-            elementIndex0 = 0;
-            imgWithIndex1Opened = 0;
+            await changeImgToShirt('', '1', 'imgTick')
             chekResult++;
         }
         if (imgWithIndex1Opened === 1) {
-            //alert('imgWithIndex1Opened === 1');
-
-            await new Promise(r => setTimeout(r, 1000));
-            image = document.getElementById(newImgId);
-            image.src="img/shirtForGame.jpeg";
-            image = document.getElementById(oldImgId + '1');
-            image.src="img/shirtForGame.jpeg";
-            newImgId = "";
-            oldImgId = "";
-            elementIndex1 = 0;
-            elementIndex0 = 0;
-            imgWithIndex1Opened = 0;
+            await changeImgToShirt('', '1', 'shirtForGame')
         }
         if (imgWithIndex1Opened === 2) {
-            //alert('imgWithIndex1Opened === 2');
-            await new Promise(r => setTimeout(r, 1000));
-            image = document.getElementById(newImgId + '1');
-            image.src="img/shirtForGame.jpeg";
-            image = document.getElementById(oldImgId);
-            image.src="img/shirtForGame.jpeg";
-            newImgId = "";
-            oldImgId = "";
-            elementIndex1 = 0;
-            elementIndex0 = 0;
-            imgWithIndex1Opened = 0;
+            await changeImgToShirt('1', '', 'shirtForGame')
         }
     }
     if (elementIndex0 === 2) {
         if (newImgId !== oldImgId) {
-            //alert('newImgId !== oldImgId elementIndex0 === 2');
-            await new Promise(r => setTimeout(r, 1000));
-            image = document.getElementById(newImgId);
-            image.src = "img/shirtForGame.jpeg";
-            image = document.getElementById(oldImgId);
-            image.src = "img/shirtForGame.jpeg";
-            newImgId = "";
-            oldImgId = "";
-            elementIndex1 = 0;
-            elementIndex0 = 0;
-            imgWithIndex1Opened = 0;
+            await changeImgToShirt('', '', 'shirtForGame')
         } else {
             elementIndex0 = elementIndex0 - 1;
         }
     }
     if (elementIndex1 === 2) {
         if (newImgId !== oldImgId) {
-            //alert('newImgId !== oldImgId elementIndex1 === 2');
-            await new Promise(r => setTimeout(r, 1000));
-            image = document.getElementById(newImgId + '1');
-            image.src = "img/shirtForGame.jpeg";
-            image = document.getElementById(oldImgId + '1');
-            image.src = "img/shirtForGame.jpeg";
-            newImgId = "";
-            oldImgId = "";
-            elementIndex1 = 0;
-            elementIndex0 = 0;
-            imgWithIndex1Opened = 0;
+            await changeImgToShirt('1', '1', 'shirtForGame')
         } else {
             elementIndex1 = elementIndex1 - 1;
         }
@@ -131,15 +80,15 @@ function changeImgTo(imgName) {
     image.src=("img/" + imgName + ".jpeg");
 }
 
-/*function disableDiv() {
-    for (var elementIndex0 = 0; elementIndex0 < allDivArray.length;) {
-        document.getElementById(allDivArray[elementIndex0]).style.pointerEvents = "none";
-    }
+async function changeImgToShirt(element1, element2, imageName) {
+    await new Promise(r => setTimeout(r, 1000));
+    image = document.getElementById(newImgId + element1);
+    image.src="img/" + imageName +".jpeg";
+    image = document.getElementById(oldImgId + element2);
+    image.src="img/" + imageName + ".jpeg";
+    newImgId = "";
+    oldImgId = "";
+    elementIndex1 = 0;
+    elementIndex0 = 0;
+    imgWithIndex1Opened = 0;
 }
-
-function enableDiv() {
-    for (var elementIndex0 = 0; elementIndex0 < allDivArray.length;) {
-        //document.getElementById(allDivArray[elementIndex0]).style.pointerEvents = "changeImg()";
-        $(allDivArray[elementIndex0]).attributes('onClick', changeImg())
-    }
-}*/
