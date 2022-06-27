@@ -17,20 +17,23 @@ async function changeImg() {
     imgId = event.target.id;
     imgIdLastChar = imgId[imgId.length - 1];
     if (imgIdLastChar === '0' || imgIdLastChar === '1' || imgIdLastChar === '2' || imgIdLastChar === '3') {
-        randEl = Math.floor(Math.random()*imgArray.length);
+        randEl = Math.floor(Math.random() * imgArray.length);
         imgIdName = imgArray[randEl];
-        document.getElementById(imgId).id=(imgId + imgIdName);
+        document.getElementById(imgId).id = (imgId + imgIdName);
         imgArray.splice(randEl, 1)
     }
+
     //получение доступа к перевороту карточки
     newImgId = event.target.id;
     image = document.getElementById(newImgId);
     imgName = newImgId;
-    imgName.substring(1);
-    alert(imgName)
+    imgName = imgName.substring(3);
+
     //переворот карточки
     changeImgTo('img' + imgName);
+
     cardsOpened++;
+
     //проверка двух карточек на схожесть и различие
     if (cardsOpened === 2) {
         if (oldImgName === imgName) {
@@ -38,21 +41,25 @@ async function changeImg() {
                 cardsOpened -= 1;
             } else {
                 await changeImgToShirt('', '', 'imgTick')
+                chekResult++;
             }
         } else {
             await changeImgToShirt('', '', 'shirtForGame')
         }
     }
+
     //проверка победы
     if (chekResult === 8) {
         alert("YOU WON!!!")
     }
+
     oldImgId = newImgId;
     oldImgName = imgName;
 }
 function changeImgTo(imgName) {
     image.src=("img/" + imgName + ".jpeg");
 }
+
 async function changeImgToShirt(element1, element2, imageName) {
     await new Promise(r => setTimeout(r, 1000));
     image = document.getElementById(newImgId + element1);
